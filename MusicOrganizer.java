@@ -185,4 +185,11 @@ public class MusicOrganizer
             }
         }
     }
+    
+    public void añadirNombreAlbum(int index, String album)
+    {
+        if(indexValid(index)) {
+            tracks.get(index).setNombreAlbum(album);
+        }
+    }
 }

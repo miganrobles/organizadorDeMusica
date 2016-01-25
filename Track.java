@@ -13,6 +13,8 @@ public class Track
     private String title;
     // Where the track is stored.
     private String filename;
+    // Nombre album al que pertenece la canción
+    private String album;
     // Atributo para guardar la cuenta de las veces que se ha reproducido una canción.
     private int playCount;
     /**
@@ -23,7 +25,7 @@ public class Track
      */
     public Track(String artist, String title, String filename)
     {
-        setDetails(artist, title, filename);
+        setDetails(artist, title, filename, album);
         playCount = 0;
     }
     
@@ -35,7 +37,7 @@ public class Track
      */
     public Track(String filename)
     {
-        setDetails("unknown", "unknown", filename);
+        setDetails("unknown", "unknown", filename, "unknown");
         playCount = 0;
     }
     
@@ -65,6 +67,14 @@ public class Track
     {
         return filename;
     }
+    
+    /**
+     * Devuelve el nombre del Album al que pertence la canción
+     */
+    public String getAlbum()
+    {
+        return album;
+    }
         
     /**
      * Return details of the track: artist, title and file name.
@@ -72,7 +82,7 @@ public class Track
      */
     public String getDetails()
     {
-        return artist + ": " + title + "  (file: " + filename + ")" + "   Reproducciones:" + playCount;
+        return artist + ": " + title + "  (file: " + filename + ")" + " (album: " + album + ") " + "   Reproducciones:" + playCount;
     }
     
     /**
@@ -81,13 +91,21 @@ public class Track
      * @param title The track's title.
      * @param filename The track file. 
      */
-    private void setDetails(String artist, String title, String filename)
+    private void setDetails(String artist, String title, String filename, String album)
     {
         this.artist = artist;
         this.title = title;
         this.filename = filename;
+        this.album = album;
     }
     
+    /**
+     * Este método nos permite modificar el nombre del album
+     */
+    public void setNombreAlbum(String album) 
+    {
+        this.album = album;
+    }
     /**
      * Resetea el contador de las veces que se reproduce una canción
      */
