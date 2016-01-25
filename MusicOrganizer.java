@@ -15,6 +15,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    // Atributo que nos indica si se está reproduciendo alguna canción en este momento
+    private boolean reproduccion;
 
     /**
      * Create a MusicOrganizer
@@ -24,11 +26,12 @@ public class MusicOrganizer
         tracks = new ArrayList<Track>();
         player = new MusicPlayer();
         reader = new TrackReader();
+        reproduccion = false;
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
     }
-    
+
     /**
      * Add a track file to the collection.
      * @param filename The file name of the track to be added.
@@ -37,7 +40,7 @@ public class MusicOrganizer
     {
         tracks.add(new Track(filename));
     }
-    
+
     /**
      * Add a track to the collection.
      * @param track The track to be added.
@@ -46,7 +49,7 @@ public class MusicOrganizer
     {
         tracks.add(track);
     }
-    
+
     /**
      * Play a track in the collection.
      * @param index The index of the track to be played.
@@ -56,11 +59,12 @@ public class MusicOrganizer
         if(indexValid(index)) {
             Track track = tracks.get(index);
             player.startPlaying(track.getFilename());
+            reproduccion = true;
             tracks.get(index).incrementaContador();
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
         }
     }
-    
+
     /**
      * Return the number of tracks in the collection.
      * @return The number of tracks in the collection.
@@ -69,7 +73,7 @@ public class MusicOrganizer
     {
         return tracks.size();
     }
-    
+
     /**
      * List a track from the collection.
      * @param index The index of the track to be listed.
@@ -80,7 +84,7 @@ public class MusicOrganizer
         Track track = tracks.get(index);
         System.out.println(track.getDetails());
     }
-    
+
     /**
      * Show a list of all the tracks in the collection.
      */
@@ -93,7 +97,7 @@ public class MusicOrganizer
         }
         System.out.println();
     }
-    
+
     /**
      * List all tracks by the given artist.
      * @param artist The artist's name.
@@ -106,7 +110,7 @@ public class MusicOrganizer
             }
         }
     }
-    
+
     /**
      * Remove a track from the collection.
      * @param index The index of the track to be removed.
@@ -117,24 +121,26 @@ public class MusicOrganizer
             tracks.remove(index);
         }
     }
-    
+
     /**
      * Play the first track in the collection, if there is one.
      */
     public void playFirst()
     {
         if(tracks.size() > 0) {
+            reproduccion = true;
             player.startPlaying(tracks.get(0).getFilename());
             tracks.get(0).incrementaContador();
         }
     }
-    
+
     /**
      * Stop the player.
      */
     public void stopPlaying()
     {
         player.stop();
+        reproduccion = false;
     }
 
     /**
@@ -148,7 +154,7 @@ public class MusicOrganizer
         // The return value.
         // Set according to whether the index is valid or not.
         boolean valid;
-        
+
         if(index < 0) {
             System.out.println("Index cannot be negative: " + index);
             valid = false;
@@ -162,7 +168,7 @@ public class MusicOrganizer
         }
         return valid;
     }
-    
+
     private void readLibrary(String folderName)
     {
         ArrayList<Track> tempTracks = reader.readTracks(folderName, ".mp3");
@@ -172,7 +178,7 @@ public class MusicOrganizer
             addTrack(track);
         }
     }
-    
+
     /**
      * Este método toma un un parámetro de tipo String y muestre por pantalla
      * la información de los tracks que contienen dicha cadena en el título de la canción.
@@ -185,11 +191,26 @@ public class MusicOrganizer
             }
         }
     }
-    
+
+    /**
+     * Este método nos permite añadir el nombre del albun de la canción que le indiquemos según su índice
+     */
     public void añadirNombreAlbum(int index, String album)
     {
         if(indexValid(index)) {
             tracks.get(index).setNombreAlbum(album);
         }
+    }
+    
+    /**
+     *  Este método cuando se invoca informa por pantalla de si en este momento se está reproduciendo un track o si no.
+     */
+    public void isPlaying()
+    {
+        String mensaje = "En este momento no se está reproduciendo ninguna canción";
+        if (reproduccion) {
+            mensaje = "En este momento se está reproduciendo una canción";
+        }
+        System.out.println(mensaje);
     }
 }
