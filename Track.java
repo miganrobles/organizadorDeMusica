@@ -25,10 +25,11 @@ public class Track
      */
     public Track(String artist, String title, String filename)
     {
-        setDetails(artist, title, filename, album);
+        setDetails(artist, title, filename);
         playCount = 0;
+        album = "Desconocido";
     }
-    
+
     /**
      * Constructor for objects of class Track.
      * It is assumed that the file name cannot be
@@ -37,10 +38,11 @@ public class Track
      */
     public Track(String filename)
     {
-        setDetails("unknown", "unknown", filename, "unknown");
+        setDetails("unknown", "unknown", filename);
         playCount = 0;
+        album = "Desconocido";
     }
-    
+
     /**
      * Return the artist.
      * @return The artist.
@@ -49,7 +51,7 @@ public class Track
     {
         return artist;
     }
-    
+
     /**
      * Return the title.
      * @return The title.
@@ -58,7 +60,7 @@ public class Track
     {
         return title;
     }
-    
+
     /**
      * Return the file name.
      * @return The file name.
@@ -67,7 +69,7 @@ public class Track
     {
         return filename;
     }
-    
+
     /**
      * Devuelve el nombre del Album al que pertence la canción
      */
@@ -75,7 +77,7 @@ public class Track
     {
         return album;
     }
-        
+
     /**
      * Return details of the track: artist, title and file name.
      * @return The track's details.
@@ -84,21 +86,20 @@ public class Track
     {
         return artist + ": " + title + "  (file: " + filename + ")" + " (album: " + album + ") " + "   Reproducciones:" + playCount;
     }
-    
+
     /**
      * Set details of the track.
      * @param artist The track's artist.
      * @param title The track's title.
      * @param filename The track file. 
      */
-    private void setDetails(String artist, String title, String filename, String album)
+    private void setDetails(String artist, String title, String filename)
     {
         this.artist = artist;
         this.title = title;
         this.filename = filename;
-        this.album = album;
     }
-    
+
     /**
      * Este método nos permite modificar el nombre del album
      */
@@ -106,6 +107,7 @@ public class Track
     {
         this.album = album;
     }
+
     /**
      * Resetea el contador de las veces que se reproduce una canción
      */
@@ -113,7 +115,7 @@ public class Track
     {
         playCount = 0;
     }
-    
+
     /**
      * Incrementa el contador de las veces que se reproduce una canción
      */
