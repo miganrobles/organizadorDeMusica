@@ -223,7 +223,7 @@ public class MusicOrganizer
         }
         System.out.println(mensaje);
     }
-    
+
     /**
      * Este método muestra los detalles de todos los tracks usando un iterador
      */
@@ -232,6 +232,19 @@ public class MusicOrganizer
         Iterator<Track> it = tracks.iterator();
         while (it.hasNext()) {
             System.out.println(it.next().getDetails());
+        }
+    }
+
+    /**
+     * Este método nos permite eliminar los tracks que contengan un determinado autor
+     */
+    public void removeByArtist(String artist)
+    {
+        Iterator<Track> it = tracks.iterator();
+        while (it.hasNext()) {
+            if(it.next().getArtist().contains(artist)) {
+                it.remove();
+            }
         }
     }
 }
