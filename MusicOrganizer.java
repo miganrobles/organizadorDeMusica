@@ -247,4 +247,17 @@ public class MusicOrganizer
             }
         }
     }
+    
+    /**
+     * Este método nos permite eliminar los tracks que contengan un determinado texto en el título de la canción
+     */
+    public void removeByTitle(String title)
+    {
+        Iterator<Track> it = tracks.iterator();
+        while (it.hasNext()) {
+            if(it.next().getTitle().contains(title)) {
+                it.remove();
+            }
+        }
+    }
 }
